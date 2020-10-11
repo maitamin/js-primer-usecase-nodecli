@@ -1,7 +1,17 @@
 // console.log(process.argv);
 
 const program = require("commander");
-program.parse(process.argsv);
+const fs = require("fs");
 
+program.parse(process.argsv);
 const filePath = program.args[0];
-console.log(filePath);
+
+fs.readFile(filePath, {encoding: "utf8"}, (err, file) => {
+    if (err) {
+        console.error(err.message);
+        process.exit(1);
+        return;
+    }
+    console.log(file);
+});
+
